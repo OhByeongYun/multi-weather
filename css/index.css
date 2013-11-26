@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+body {
+	padding-top: 41px;
+}
+
+#footer {
+	text-align: center;
+	margin-top: 70px;
+	padding: 20px 0;
+	border-top: 1px solid #e5e5e5;
+	font: 13px Helvetica, arial, freesans, clean, sans-serif;
+}

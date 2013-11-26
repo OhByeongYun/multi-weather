@@ -1,14 +1,45 @@
 <!doctype html>
 <html>
 <head>
-	<mata charset="utf-8">
+	<meta charset="utf-8" />
 	<title>Today's Weather</title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" href="css/index.css" />
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.10/d3.min.js"></script>
 </head>
 <body>
+	<!-- header -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a href="#" class="brand">Weather</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active">
+							<a href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- content -->
+	<div id="content" class="container">
+		
+	</div>
+	
+	<!-- footer -->
+	<div id="footer">
+		<div class="container">
+			<p class="muted credit">
+				© 2013-2014 <a href="#">Weather</a>.
+			</p>
+		</div>
+	</div>
+	
 	<script src="js/weather.js"></script>
 </body>
 </html>
