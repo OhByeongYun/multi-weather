@@ -44,6 +44,25 @@
 	<script src="js/jsondata.js"></script>
 	<script src="js/weather.js"></script>
 	<script src="js/view.js"></script>
-
+	<script>
+		$(document).ready(function(){
+			var CityCode = {
+				'서울': 'KSXX0037',
+				'대전': 'KSXX0027',
+				'대구': 'KSXX0026',
+				'전주': 'KSXX0047',
+				'광주': 'KSXX7663',
+				'부산': 'KSXX0050',
+				'제주': 'KSJU0110',
+				'강릉': 'KSXX0011',
+				'울릉': 'KSXX0039',
+				'독도': 'KSXX0036'
+			};
+			
+			Weather.getWeather(CityCode, function(data){
+				console.log(data);
+			});
+		});
+	</script>
 </body>
 </html>
