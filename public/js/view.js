@@ -42,7 +42,7 @@ function drawText() {
   svgContainer.selectAll("text").remove();
     var text_temperature = svgContainer
                           .selectAll("circles")
-                          .data(jsontext)
+                          .data(jsonCircles)
                           .enter()                          
                           .append("text")                     
                           .text(function(d){return d.temperature + " C";})
@@ -55,7 +55,7 @@ function drawText() {
 
    var text_region = svgContainer
                       .selectAll("circles")
-                      .data(jsontext)
+                      .data(jsonCircles)
                       .enter()                          
                       .append("text")                          
                       .text(function(d){return d.region_name;})
@@ -173,7 +173,9 @@ function eventCircle(){
       var  loc = (randomInt(0, 1) - randomInt(0, 1))/10;
 
       jsonCircles[i]["x_axis"] += loc;
-      
+      //jsonCircles[i]["y_axis"] += loc;
+
+
       loc = (randomInt(0, 1) - randomInt(0, 1))/10;
       jsonCircles[i]["radius"] += loc;
      
