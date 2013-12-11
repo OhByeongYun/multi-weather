@@ -36,7 +36,8 @@ function temperatureChart(dataset)
          .attr('height', function (d) {
             return height-y(d)+40;
           })
-         .attr('fill', 'black');
+         .attr('fill', 'black')
+         .attr('opacity',0.7);
 
     var xAxis = d3.svg.axis()
                   .scale(x)
@@ -54,22 +55,23 @@ function temperatureChart(dataset)
          return d;
        })
        .attr('x', function(d, i) {
-         return parseInt(x(i)) + 1;
+         return parseInt(x(i)) + 31;
        })
        .attr('y', function(d) {
          return y(d)+10;
-       })
+       })       
        .attr('font-size','10px')
        .attr('fill', 'white')
 }
 
 
 function windChart(winddata){
+  console.log(winddata);
  var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 500 - margin.left - margin.right,
+    width = 450 - margin.left - margin.right,
     height = 150 - margin.top - margin.bottom;
 
-var parseDate = d3.time.format("%d-%b-%y").parse;
+var parseDate = d3.time.format("%d %b %y").parse;
 
 var x = d3.time.scale()
     .range([0, width]);
@@ -97,7 +99,7 @@ var svg = d3.select("#myModal .modal-body .wind").append("svg")
 
 
   winddata.forEach(function(d) {
-    d.date = parseDate(d.date);
+    // d.date = parseDate(d.date);
     d.close = +d.close;
   });
 

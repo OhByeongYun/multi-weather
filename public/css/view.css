@@ -43,13 +43,13 @@ div#popup_secViewer{
 .modal-body .title{
     position: relative;
     left: 40px;
-    width: 40px;
+    width: 200px;
     height: 20px;
 }
 
 .axis path,
 .axis line {
-  fill: black;
+  fill: white;
   stroke: #000;
   shape-rendering: crispEdges;
 }

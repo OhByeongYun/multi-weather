@@ -4,6 +4,21 @@ var svgContainer = d3.select("body")
                     .attr("height",startposition+650)
                     .attr("width",startposition+550);
 
+function initData(){   
+    Weather.getWeather(function(data){      
+
+       data.forEach(function(d) {
+          for(var i = 0 ; i < jsonCircles.length ; i++){
+            if(d.city == CityName[i]){
+              jsonCircles[i].temperature = d["condition"]["temp"];
+              jsontext[i].temperature = d["condition"]["temp"];
+            }
+          }            
+        });    
+        
+    }, CityCode);    
+}
+
 /*지역 그리기*/
 function drawCircle() {
  svgContainer.selectAll("circle").remove();
@@ -17,11 +32,9 @@ function drawCircle() {
                           .attr("class","bubble")                                                   
                           .style("fill", function(d) { return d.color; })
                           .on("mousedown", function(d) { secLayoutViewer(d); });//클릭 이벤트 ;
-    
 }
 
 /*지역명 표기*/
-
 function drawText() {
   svgContainer.selectAll("text").remove();
     var text_temperature = svgContainer
@@ -51,50 +64,35 @@ function drawText() {
                         });//클릭 이벤트 ;;
 }
 
-function secLayoutViewer(data){
+function secLayoutViewer(jsondata){
   // $('#popup_secViewer').removeClass("hide").addClass("show");
-  var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,];
-
-  var windtest = [
-    {"date":"1-May-12","close": 582.13},
-    {"date":"30-Apr-12","close" : 583.98},
-    {"date":"27-Apr-12","close" : 603.00},
-    {"date":"26-Apr-12","close" : 607.70},
-    {"date":"25-Apr-12","close" : 610.00},
-    {"date":"24-Apr-12","close" : 560.28},
-    {"date":"23-Apr-12","close" : 571.70}
-    //  {"data":1,"close": 582},
-    // {"data":30,"close" : 583},
-    // {"data":27,"close" : 603},
-    // {"data":26,"close" : 607},
-    // {"data":25,"close" : 610},
-    // {"data":24,"close" : 560},
-    // {"data":23,"close" : 571}
-];
-  /*  var CityCode = {
-      '서울': 'KSXX0037',
-      '대전': 'KSXX0027',
-      '대구': 'KSXX0026',
-      '전주': 'KSXX0047',
-      '광주': 'KSXX7663',
-      '부산': 'KSXX0050',
-      '제주': 'KSJU0110',
-      '강릉': 'KSXX0011',
-      '울릉': 'KSXX0039',
-      '독도': 'KSXX0036'
-    };
-    
-    Weather.getWeather(function(data){
-      console.log(data);
-    }, CityCode);*/
-
+  var dataset = [];
+  var windtest = [];
   
-  $('#myModal .modal-header .modal-title').text(data.region_name);
+   var dateTime = new Date(); 
+   var day = dateTime.getDate(); 
 
+    var o = {};
+    o[jsondata.region_name] = CityCode[jsondata.region_name];
+    console.log(o);
+    Weather.getWeather(function(data){
+       
+        data.forEach(function(d) {
+          for(var i= 0; i< d.forecast.length ; i++){            
+             dataset[i] = d.forecast[i].high;
+             windtest[i] = {"date": day++ ,"close":d.forecast[i].low};
+          }
+        });
+    }, o);  
+
+  $('#myModal .modal-header .modal-title').text(jsondata.region_name);
+
+setTimeout(function(){ drawPath();
   temperatureChart(dataset);
   windChart(windtest);
 
-  $('#myModal').modal('show');
+  $('#myModal').modal('show');  
+}, 300);
 
 }
 
@@ -167,24 +165,12 @@ function drawPath(){
 
 var iterCircle = 0;
 function eventCircle(){
-  setInterval(function(){
-  /*$('svg Circle').eq(iterCircle).fadeOut(100, function(){ 
-  
-    $('svg Circle').eq(iterCircle).fadeIn(300);
-    iterCircle++;
-
-    if(iterCircle == 10){
-      iterCircle = 0;
-    }
-  });*/
-    // d3.select("#colum").selectAll("svg").remove();
-
+  setInterval(function(){ 
     for(var i = 0 ; i < jsonCircles.length ; i++){
       var  loc = (randomInt(0, 1) - randomInt(0, 1))/10;
 
       jsonCircles[i]["x_axis"] += loc;
-      // loc = (randomInt(0, 1) - randomInt(0, 1))/5;
-      // jsonCircles[i]["y_axis"] += loc;
+      
       loc = (randomInt(0, 1) - randomInt(0, 1))/10;
       jsonCircles[i]["radius"] += loc;
      
@@ -196,25 +182,17 @@ function eventCircle(){
   }, 10);
 }
 
-
 function randomInt(from, to)   
 {  
     return (Math.random()*(to - from + 1)) + from;  
 } 
 
-
-
-
-
-// function bootstrap(){  
-//   $(".alert").alert('close');
-// }
-
-// 
 /*시작*/
-drawPath();
-drawCircle();
-drawText();
+initData();
 
-eventCircle();
+setTimeout(function(){ drawPath();
+  drawCircle();
+  drawText();
+  eventCircle();
+}, 700);
 
