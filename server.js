@@ -1,8 +1,6 @@
 // general module import
 var express = require('express')
-  , http = require('http')
-//  , cookie = require('cookie')
-//  , connect = require('connect')
+  , http = require('http');
 
 // create server
 var app = express();
@@ -16,7 +14,12 @@ app.set('views', __dirname + '/view');
 
 
 // route
-/*
-app.get('/', site.index);
-app.get('/client', site.client);
-*/
+app.get('/', function(req, res){
+	res.render('index', {title: 'Weather:: Main'});
+});
+app.get('/all', function(req, res){
+	res.render('all', {title: 'Weather:: All'});
+});
+app.get('/local', function(req, res){
+	res.render('local', {title: 'Weather:: Local'});
+});

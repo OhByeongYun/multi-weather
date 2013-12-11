@@ -1,0 +1,21 @@
+doctype 5
+html
+	head
+		title= title
+		link(rel="stylesheet", href="css/bootstrap.min.css")
+		script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+		script(src="js/bootstrap.min.js")
+		
+		block link
+	body
+		include header
+		block content
+		include footer
+		
+		script.
+			Weather.getLocation(function(data){
+				$("#location").text(data);
+			});
+			Weather.getTime(function(time){
+				$("#time").text(time.hour + ":" + time.min + ":" + time.seconds + " " + time.noon);
+			});
