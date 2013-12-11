@@ -6,6 +6,7 @@ var svgContainer = d3.select("body")
 
 /*지역 그리기*/
 function drawCircle() {
+ svgContainer.selectAll("circle").remove();
     var circles = svgContainer.selectAll("circle")
                           .data(jsonCircles)
                           .enter()
@@ -20,10 +21,12 @@ function drawCircle() {
 }
 
 /*지역명 표기*/
+
 function drawText() {
+  svgContainer.selectAll("text").remove();
     var text_temperature = svgContainer
                           .selectAll("circles")
-                          .data(jsonCircles)
+                          .data(jsontext)
                           .enter()                          
                           .append("text")                     
                           .text(function(d){return d.temperature;})
@@ -36,7 +39,7 @@ function drawText() {
 
    var text_region = svgContainer
                       .selectAll("circles")
-                      .data(jsonCircles)
+                      .data(jsontext)
                       .enter()                          
                       .append("text")                          
                       .text(function(d){return d.region_name;})
@@ -52,8 +55,23 @@ function secLayoutViewer(data){
   // $('#popup_secViewer').removeClass("hide").addClass("show");
   var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,];
 
-  
-    var CityCode = {
+  var windtest = [
+    {"date":"1-May-12","close": 582.13},
+    {"date":"30-Apr-12","close" : 583.98},
+    {"date":"27-Apr-12","close" : 603.00},
+    {"date":"26-Apr-12","close" : 607.70},
+    {"date":"25-Apr-12","close" : 610.00},
+    {"date":"24-Apr-12","close" : 560.28},
+    {"date":"23-Apr-12","close" : 571.70}
+    //  {"data":1,"close": 582},
+    // {"data":30,"close" : 583},
+    // {"data":27,"close" : 603},
+    // {"data":26,"close" : 607},
+    // {"data":25,"close" : 610},
+    // {"data":24,"close" : 560},
+    // {"data":23,"close" : 571}
+];
+  /*  var CityCode = {
       '서울': 'KSXX0037',
       '대전': 'KSXX0027',
       '대구': 'KSXX0026',
@@ -68,12 +86,14 @@ function secLayoutViewer(data){
     
     Weather.getWeather(function(data){
       console.log(data);
-    }, CityCode);
+    }, CityCode);*/
 
-  console.log("setlayOut");  
+  
   $('#myModal .modal-header .modal-title').text(data.region_name);
 
   temperatureChart(dataset);
+  windChart(windtest);
+
   $('#myModal').modal('show');
 
 }
@@ -126,7 +146,8 @@ function pushPath(){
 
 /*패스 그리기*/
 function drawPath(){
-
+  svgContainer.selectAll("line").remove();
+  jsonPath = [];
   pushPath();
 
   var text_temperature = svgContainer
@@ -156,26 +177,30 @@ function eventCircle(){
       iterCircle = 0;
     }
   });*/
-    
+    // d3.select("#colum").selectAll("svg").remove();
 
     for(var i = 0 ; i < jsonCircles.length ; i++){
-      var num = 3 ;
-      var loc = Math.floor(Math.random()*num); 
+      var  loc = (randomInt(0, 1) - randomInt(0, 1))/10;
 
       jsonCircles[i]["x_axis"] += loc;
-      jsonCircles[i]["y_axis"] += loc;
+      // loc = (randomInt(0, 1) - randomInt(0, 1))/5;
+      // jsonCircles[i]["y_axis"] += loc;
+      loc = (randomInt(0, 1) - randomInt(0, 1))/10;
       jsonCircles[i]["radius"] += loc;
-
+     
     }
     drawPath();
     drawCircle();
     drawText();
 
-  }, 300);
+  }, 10);
 }
 
 
-
+function randomInt(from, to)   
+{  
+    return (Math.random()*(to - from + 1)) + from;  
+} 
 
 
 
@@ -191,5 +216,5 @@ drawPath();
 drawCircle();
 drawText();
 
-// eventCircle();
+eventCircle();
 
