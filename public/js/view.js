@@ -19,7 +19,7 @@ function initData(){
           }            
         });    
         
-    }, CityCode);    
+    }, CityCode);
 }
 
 /*지역 그리기*/
@@ -74,23 +74,33 @@ function secLayoutViewer(jsondata){
   
    var dateTime = new Date(); 
    var day = dateTime.getDate(); 
-
+   var hum;
+   var pres;
     var o = {};
     o[jsondata.region_name] = CityCode[jsondata.region_name];
-    console.log(o);
+    
     Weather.getWeather(function(data){
        
+        
+
         data.forEach(function(d) {
+          console.log(d);
+          hum = d.humidity;
+          pres = d.pressure;
           for(var i= 0; i< d.forecast.length ; i++){            
              dataset[i] = d.forecast[i].high;
              windtest[i] = {"date": day++ ,"close":d.forecast[i].low};
           }
         });
     }, o);  
-
+  
   $('#myModal .modal-header .modal-title').text(jsondata.region_name);
+  
+  
 
 setTimeout(function(){ drawPath();
+  $('.modal-body .humidity .text').text(hum + " %");
+  $('.modal-body .pressure .text').text(pres+ " mb"); 
   temperatureChart(dataset);
   windChart(windtest);
 

@@ -40,7 +40,7 @@ div#popup_secViewer{
     /*border: black solid 1px;*/
 }
 
-.modal-body .title{
+.modal-body div.title{
     position: relative;
     left: 40px;
     width: 200px;
@@ -63,6 +63,64 @@ div#popup_secViewer{
   stroke: steelblue;
   stroke-width: 1.5px;
 }
+
+div.modal-body .humidity{    
+    position: relative;
+    left : 40px;
+    width: 40%;
+    height: 20px;
+    float: left;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+div.modal-body .pressure{
+    position: relative;    
+    left : 50px;
+    width: 40%;
+    height: 20px;
+    float: left;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+div.modal-body .pressure .title{
+    position: relative;
+    width: 50px;
+    height: 20px;
+    left :20px;
+    float: left;
+    border-right: 1px solid gray;
+}
+
+div.modal-body .pressure .text{
+    position: relative;
+    width: 100px;
+    height: 20px;
+    left: 60px;
+    float: left;
+}
+
+div.modal-body .humidity .title{
+    position: relative;
+    width: 50px;
+    height: 20px;
+    left :20px;
+    float: left;
+    border-right: 1px solid gray;
+}
+
+div.modal-body .humidity .text{
+    position: relative;
+    width: 100px;
+    height: 20px;
+    left: 60px;
+    float: left;
+
+}
+
+
+
+
+
 
 
 /*
