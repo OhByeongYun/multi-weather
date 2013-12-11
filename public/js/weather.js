@@ -96,11 +96,12 @@ var Weather = (function(){
 	
 	/*
 	 * @function getWeather
-	 * @param (data) : city code obj
 	 * @param (func) : callback
+	 * @param (data) : city code obj
+	 * @param (async) : asynchronus option [default: true]
 	 *
 	 * var objs = {'city': code, 'city': code};
-	 * Weather.getWeather(objs, function(data){ ... });
+	 * Weather.getWeather(objs, function(data){ ... }, true);
 	 *
 	 */
 	 
@@ -118,7 +119,7 @@ var Weather = (function(){
 			'독도': 'KSXX0036'
 		};
 	*/                
-	var getWeather = function(func, data) {
+	var getWeather = function(func, data, async) {
 		var result = [];
 		
 		if(data === undefined) {
@@ -130,7 +131,12 @@ var Weather = (function(){
 		  , j = 0
 		  , len = 0
 		  , city
-		  , code;
+		  , code
+		  , isAsync = true;
+		
+		if(async !== undefined) {
+			isAsync = async;
+		}
 		
 		for(i in data) { 
 			len++;
@@ -155,7 +161,7 @@ var Weather = (function(){
 				url: _url,
 				dataType: 'json',
 				type: 'get',
-				async: true,
+				async: isAsync,
 				success: function(data) {
 					var result = data.query.results.channel;
 					
