@@ -51,12 +51,29 @@ function drawText() {
 function secLayoutViewer(data){
   // $('#popup_secViewer').removeClass("hide").addClass("show");
   var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,];
-  console.log("setlayOut");  
+
   
+    var CityCode = {
+      '서울': 'KSXX0037',
+      '대전': 'KSXX0027',
+      '대구': 'KSXX0026',
+      '전주': 'KSXX0047',
+      '광주': 'KSXX7663',
+      '부산': 'KSXX0050',
+      '제주': 'KSJU0110',
+      '강릉': 'KSXX0011',
+      '울릉': 'KSXX0039',
+      '독도': 'KSXX0036'
+    };
+    
+    Weather.getWeather(function(data){
+      console.log(data);
+    }, CityCode);
+
+  console.log("setlayOut");  
   $('#myModal .modal-header .modal-title').text(data.region_name);
 
   temperatureChart(dataset);
-
   $('#myModal').modal('show');
 
 }
@@ -68,6 +85,7 @@ function survePathdraw(){
       { "prev":0, "next":2},
       { "prev":0, "next":3},
       { "prev":1, "next":3},
+      { "prev":1, "next":4},
       { "prev":1, "next":8},
       { "prev":2, "next":5},
       { "prev":3, "next":5},
