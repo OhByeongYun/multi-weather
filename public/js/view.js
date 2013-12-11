@@ -1,17 +1,20 @@
 var svgContainer = d3.select("body")
                     .selectAll("#colum")
                     .append("svg")
-                    .attr("height",startposition+650)
-                    .attr("width",startposition+550);
+                    .attr("height",startposition+750)
+                    .attr("width",startposition+600);
 
 function initData(){   
-    Weather.getWeather(function(data){      
+    Weather.getWeather(function(data){
 
        data.forEach(function(d) {
           for(var i = 0 ; i < jsonCircles.length ; i++){
             if(d.city == CityName[i]){
               jsonCircles[i].temperature = d["condition"]["temp"];
               jsontext[i].temperature = d["condition"]["temp"];
+
+              jsonCircles[i].radius = 50 + (parseInt(d["condition"]["temp"])*2);
+              // jsontext[i].radius = 50 + d["condition"]["temp"];
             }
           }            
         });    
@@ -42,7 +45,7 @@ function drawText() {
                           .data(jsontext)
                           .enter()                          
                           .append("text")                     
-                          .text(function(d){return d.temperature;})
+                          .text(function(d){return d.temperature + " C";})
                           .attr("class","txt_type1")
                           .attr("transform", function (d) {
                                  return "translate("+(startposition + d.x_axis-10)+","+(startposition + d.y_axis+20)+")";
