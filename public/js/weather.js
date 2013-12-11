@@ -103,8 +103,12 @@ var Weather = (function(){
 	 * Weather.getWeather(objs, function(data){ ... });
 	 *
 	 */                   
-	var getWeather = function(data, func) {
+	var getWeather = function(func, data) {
 		var result = [];
+		
+		if(data === undefined) {
+			throw "날씨를 가져올 도시코드를 입력하세요.";
+		}
 		
 		var _url
 		  , i = 0
@@ -117,8 +121,8 @@ var Weather = (function(){
 		}
 		
 		j = 0;
-		Weather.bind('onWeatherReceive', function(e, d){
-			result.push(d);
+		Weather.bind('onWeatherReceive', function(e, data){
+			result.push(data);
 			j++;
 			
 			if(j == len) {
@@ -137,7 +141,23 @@ var Weather = (function(){
 				type: 'get',
 				async: true,
 				success: function(data) {
-					Weather.on('onWeatherReceive', data.query);
+					var result = data.query.results.channel;
+					
+					var o = {};
+					o.sunrise = result.astronomy.sunrise;
+					o.sunset = result.astronomy.sunset;
+					o.humidity = result.atmosphere.humidity;
+					o.pressure = result.atmosphere.pressure;
+					o.visibility = result.atmosphere.visibility;
+					o.condition = {};
+					o.condition.date = result.item.condition.date;
+					o.condition.temp = result.item.condition.temp;
+					o.condition.text = result.item.condition.text;
+					o.forecast = result.item.forecast;
+					o.units = result.units;
+					o.wind = result.wind;
+
+					Weather.on('onWeatherReceive', {'city': i, 'data': o});
 				}
 			});
 		}
@@ -195,6 +215,14 @@ var Weather = (function(){
 		}
 	};
 	
+	
+	/*
+	 * @function getTime
+	 * @param (func) : callback
+	 *
+	 * Weather.getTime(function(data){ ... });
+	 *
+	 */
 	var getTime = function(func) {
 		var interval;
 		

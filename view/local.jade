@@ -8,6 +8,64 @@ block content
 	div.row
 		include helpers/sidebar
 		
-		div#colum
-			div.row
-				a.badge.badge-info 전주
+		div#colum.local
+			div.row#select
+				div.row
+					div.span2 
+						div.box.active
+							span 서울
+					div.span2 
+						div.box
+							span 대전
+					div.span2 
+						div.box
+							span 대구
+					div.span2 
+						div.box
+							span 전주
+					div.span2 
+						div.box
+							span 광주
+					div.span2 
+						div.box
+							span 부산
+					div.span2 
+						div.box
+							span 제주
+				div.row
+					div.span2 
+						div.box
+							span 강릉
+					div.span2 
+						div.box
+							span 울릉
+					div.span2 
+						div.box
+							span 독도
+			div.container-fluid#local-info
+				div.row
+					div.span4
+						div.box adsfa
+				
+	script.
+		/*
+		var CityCode = {
+			'서울': 'KSXX0037',
+			'대전': 'KSXX0027',
+			'대구': 'KSXX0026',
+			'전주': 'KSXX0047',
+			'광주': 'KSXX7663',
+			'부산': 'KSXX0050',
+			'제주': 'KSJU0110',
+			'강릉': 'KSXX0011',
+			'울릉': 'KSXX0039',
+			'독도': 'KSXX0036'
+		};
+		*/
+		
+		var CityCode = {
+			'서울': 'KSXX0037'
+		};
+		Weather.getWeather(function(data){
+			console.log(data);
+		}, CityCode);
