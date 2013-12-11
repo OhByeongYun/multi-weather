@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Today's Weather</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/index.css" />
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.10/d3.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+	<!-- header -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a href="#" class="brand">Weather</a>
+				<div id="location" class="nav-collapse collapse">
+					위치를 찾는 중 (브라우저의 GPS옵션을 켜세요)
+				</div>
+				<div id="time" class="nav-collapse collapse">
+					시간을 가져오는 중
+				</div>
+				<div id="gnb" class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active">
+							<a href="#">Home</a>
+						</li>
+						<li>
+							<a href="#">Weather</a>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- content -->
+	<div id="content" class="container">
+		<div class="row">
+			<div id="sidebar-left">
+				<ul id="side-menu">
+					<li>
+						<a href="#">
+							<i class="icon-home"></i>
+							<span>처음으로</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="icon-star"></i>
+							<span>전체보기</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="icon-map-marker"></i>
+							<span>지역보기</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div id="colum">
+				content
+			</div>
+		</div>
+	</div>
+	
+	<!-- footer -->
+	<div id="footer">
+		<div class="container">
+			<p class="muted credit">
+				© 2013 <a href="#">Weather</a><br>
+				<span style="font-size: 11px;">OhByeongYun, SeoJunUi</span>
+			</p>
+		</div>
+	</div>
+	
+	<script src="js/weather.js"></script>
+	<script>
+		Weather.getLocation(function(data){
+			$("#location").text(data);
+		});
+		Weather.getTime(function(time){
+			$("#time").text(time.hour + ":" + time.min + ":" + time.seconds + " " + time.noon);
+		});
+		
+		/*
+		var CityCode = {
+			'서울': 'KSXX0037',
+			'대전': 'KSXX0027',
+			'대구': 'KSXX0026',
+			'전주': 'KSXX0047',
+			'광주': 'KSXX7663',
+			'부산': 'KSXX0050',
+			'제주': 'KSJU0110',
+			'강릉': 'KSXX0011',
+			'울릉': 'KSXX0039',
+			'독도': 'KSXX0036'
+		};
+		
+		Weather.getWeather(CityCode, function(data){
+			console.log(data);
+		});
+		*/
+	</script>
+</body>
+</html>
