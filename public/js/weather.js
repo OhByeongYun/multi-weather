@@ -129,6 +129,7 @@ var Weather = (function(){
 		  , i = 0
 		  , j = 0
 		  , len = 0
+		  , city
 		  , code;
 		
 		for(i in data) { 
@@ -159,6 +160,7 @@ var Weather = (function(){
 					var result = data.query.results.channel;
 					
 					var o = {};
+					o.city = data.query.results.channel.location.city;
 					o.sunrise = result.astronomy.sunrise;
 					o.sunset = result.astronomy.sunset;
 					o.humidity = result.atmosphere.humidity;
@@ -171,8 +173,8 @@ var Weather = (function(){
 					o.forecast = result.item.forecast;
 					o.units = result.units;
 					o.wind = result.wind;
-
-					Weather.on('onWeatherReceive', {'city': i, 'data': o});
+					
+					Weather.on('onWeatherReceive', o);
 				}
 			});
 		}

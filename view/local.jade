@@ -87,10 +87,12 @@ block content
 				div.title 
 					span.t-ko 주간예보
 					span.t-en forecast
-				div.row
-					svg#forecast
+				svg#forecast
 				
 	script.
 		Weather.getWeather(function(data){
 			console.log(data);
-		}, {'서울': 'KSXX0037'});
+			
+			//var svg = 
+			
+		}, {'서울': 'KSXX0037', '울릉': 'KSXX0039'});
