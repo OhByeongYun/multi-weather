@@ -1,5 +1,5 @@
 var svgContainer = d3.select("body")
-                    .selectAll("#content")
+                    .selectAll("#colum")
                     .append("svg")
                     .attr("height",startposition+650)
                     .attr("width",startposition+550);
@@ -13,9 +13,9 @@ function drawCircle() {
                           .attr("cx", function (d) { return startposition + d.x_axis; })
                           .attr("cy", function (d) { return startposition + d.y_axis; })
                           .attr("r", function (d) { return d.radius; })
-                          .attr("class","bubble")                          
+                          .attr("class","bubble")                                                   
                           .style("fill", function(d) { return d.color; })
-                          .on("mousedown", function(d) { alert(d.region_name)});//클릭 이벤트 ;
+                          .on("mousedown", function(d) { secLayoutViewer(d); });//클릭 이벤트 ;
     
 }
 
@@ -30,7 +30,9 @@ function drawText() {
                           .attr("class","txt_type1")
                           .attr("transform", function (d) {
                                  return "translate("+(startposition + d.x_axis-10)+","+(startposition + d.y_axis+20)+")";
-                           }).on("mousedown", function(d) { alert(d.region_name)});//클릭 이벤트 ;;
+                           }).on("mousedown", function(d) { 
+                            secLayoutViewer(d);
+                           });//클릭 이벤트 ;;
 
    var text_region = svgContainer
                       .selectAll("circles")
@@ -41,8 +43,24 @@ function drawText() {
                       .attr("class","txt_type1")
                       .attr("transform", function (d) {
                              return "translate("+(startposition + d.x_axis-15)+","+ (startposition + d.y_axis)+")";
-                       }).on("mousedown", function(d) { alert(d.region_name)});//클릭 이벤트 ;;
+                       }).on("mousedown", function(d) {
+                        secLayoutViewer(d);
+                        });//클릭 이벤트 ;;
 }
+
+function secLayoutViewer(data){
+  // $('#popup_secViewer').removeClass("hide").addClass("show");
+  var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,];
+  console.log("setlayOut");  
+  
+  $('#myModal .modal-header .modal-title').text(data.region_name);
+
+  temperatureChart(dataset);
+
+  $('#myModal').modal('show');
+
+}
+
 
 
 function survePathdraw(){
@@ -108,7 +126,52 @@ function drawPath(){
   ;
 }
 
+var iterCircle = 0;
+function eventCircle(){
+  setInterval(function(){
+  /*$('svg Circle').eq(iterCircle).fadeOut(100, function(){ 
+  
+    $('svg Circle').eq(iterCircle).fadeIn(300);
+    iterCircle++;
+
+    if(iterCircle == 10){
+      iterCircle = 0;
+    }
+  });*/
+    
+
+    for(var i = 0 ; i < jsonCircles.length ; i++){
+      var num = 3 ;
+      var loc = Math.floor(Math.random()*num); 
+
+      jsonCircles[i]["x_axis"] += loc;
+      jsonCircles[i]["y_axis"] += loc;
+      jsonCircles[i]["radius"] += loc;
+
+    }
+    drawPath();
+    drawCircle();
+    drawText();
+
+  }, 300);
+}
+
+
+
+
+
+
+
+
+// function bootstrap(){  
+//   $(".alert").alert('close');
+// }
+
+// 
 /*시작*/
 drawPath();
 drawCircle();
 drawText();
+
+// eventCircle();
+

@@ -2,11 +2,31 @@ extends helpers/layout
 
 block link
 	link(rel="stylesheet", href="css/index.css")
+	link(rel="stylesheet", href="css/view.css")
+	script(src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.10/d3.min.js")
+	script(src="js/jsondata.js")
 	script(src="js/weather.js")
+	script(src="js/chart.js")
+	
+
 	
 block content
 	div.row
 		include helpers/sidebar
 		
 		div#colum
-			
+			div#myModal.modal.fade(tabindex="-1",role="dialog",aria-labelledby="myModalLabel",aria-hidden="true")
+				div.modal-dialog
+					div.modal-content
+						div.modal-header
+							button.close(type="button",data-dismiss="modal",aria-hidden="true") x
+							h4.modal-title Modal title
+						div.modal-body
+							div.temperature 온도
+							div.wind
+							div.humidity
+						div.modal-footer
+							button.btn.btn-default(type="button",data-dismiss="modal") Close
+
+
+	script(src="js/view.js")
