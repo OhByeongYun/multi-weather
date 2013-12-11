@@ -102,7 +102,22 @@ var Weather = (function(){
 	 * var objs = {'city': code, 'city': code};
 	 * Weather.getWeather(objs, function(data){ ... });
 	 *
-	 */                   
+	 */
+	 
+	/*
+		var CityCode = {
+			'서울': 'KSXX0037',
+			'대전': 'KSXX0027',
+			'대구': 'KSXX0026',
+			'전주': 'KSXX0047',
+			'광주': 'KSXX0014',
+			'부산': 'KSXX0050',
+			'제주': 'KSXX0053',
+			'강릉': 'KSXX0011',
+			'울릉': 'KSXX0039',
+			'독도': 'KSXX0036'
+		};
+	*/                
 	var getWeather = function(func, data) {
 		var result = [];
 		

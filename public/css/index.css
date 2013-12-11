@@ -142,6 +142,9 @@ body {
 	color: #bbb;
 	text-shadow: 1px 1px #fff;
 }
+#colum1 {
+	height: 200px;
+}
 .tempbox {
 	height: 170px;
 	text-align: center;
@@ -164,13 +167,6 @@ body {
 	line-height: 60px;
 	color: #999;
 }
-/*
-#weather-now .time {
-	margin-top: 7px;
-	font-size: 10px;
-	color: #ccc;
-}
-*/
 #weather-humidity .humi {
 	margin-top:15px;
 }
@@ -227,10 +223,10 @@ body {
 }
 #weather-sun .ab {
 	position: absolute;
-	font-size: 70px;
-	color: #FFE02F;
-	margin-left: 170px;
-	margin-top: 50px;
+	margin-left: 180px;
+	margin-top: 25px;
+	border-left: solid 1px #ddd;
+	height: 100px;
 }
 #weather-sun span .time .a {
 	color: #FFE02F;
@@ -247,37 +243,27 @@ body {
 	line-height: 60px;
 	color: #999;
 }
-/*
-#weather-forecast {
-	height: 120px;
-	margin-top: 20px;
+#svg-area {
+	margin-top:50px;
+	padding-bottom: 50px;
 }
-#weather-forecast .t {
-	font-size: 20px;
-	margin-bottom: 10px;
+#svg-area .title {
+	margin-bottom: 15px;
 }
-#weather-forecast .daily {
-	width: 18%;
-	height: 100%;
-	text-align: center;
+#svg-area .title .t-ko {
+	font-size: 17px;
+	font-weight: 900;
+	color: #666;
 }
-#weather-forecast .daily .date {
-	background-color: #f1f1f1;
-	border-radius: 3px 3px 0 0;
-	border: solid 1px #ddd;
-	border-bottom: none;
+#svg-area .title .t-en {
+	color: #808080;
+	margin-left: 10px;
 }
-#weather-forecast .daily .day {
-	background-color: #f1f1f1;
-	border: solid 1px #ddd;
-	border-top: none;
+#forecast {
+	height: 300px;
+	background-color:white;
 }
-#weather-forecast .daily .fore {
-	border: solid 1px #ddd;
-	border-top: none;
-}
-#weather-forecast .daily .fore
-*/
+
 
 #footer {
 	text-align: center;

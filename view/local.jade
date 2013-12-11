@@ -2,6 +2,7 @@ extends helpers/layout
 
 block link
 	link(rel="stylesheet", href="css/index.css")
+	script(src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.11/d3.min.js")
 	script(src="js/weather.js")
 	
 block content
@@ -47,14 +48,13 @@ block content
 					span.city-ko 서울
 					span.city-en Seoul
 					span.update-time Thu, 12 Dec 2013 2:00 am KST
-				div.row
+				div.row#colum1
 					div.span3#weather-now.tempbox
 						div.box.h
 							div.temp
 								span.t -2
 								span.v C
 							div.c partly cloud
-					//		div.time Thu, 12 Dec 2013 2:00 am KST
 					div.span3#weather-humidity.tempbox
 						div.box.h
 							div.humi
@@ -72,45 +72,25 @@ block content
 							div.text wind
 					div.span5#weather-sun.tempbox
 						div.box.h
-							div.ab :
+							div.ab 
 							span.rise.s
 								div.time 
 									span.a 05
 									span.n am
-								div.t sun rise
+								div.t sunrise
 							span.set.s
 								div.time
 									span.a 07
 									span.n pm
-								div.t sun set
-					//
-					//div.span11#weather-forecast
-					//	div.t 주간예보
-					//	div.box.h
-					//		div.daily
-					//			div.date 31 Dec 2013
-					//			div.day Wed
-					//			div.fore
-					//				div.high 최대 
-					//					span 5
-					//				div.low 최소
-					//					span 1
-					//				div.text clear
-					//
+								div.t sunset
+			div.container-fluid#svg-area
+				div.title 
+					span.t-ko 주간예보
+					span.t-en forecast
+				div.row
+					svg#forecast
 				
 	script.
-		var CityCode = {
-			'서울': 'KSXX0037',
-			'대전': 'KSXX0027',
-			'대구': 'KSXX0026',
-			'전주': 'KSXX0047',
-			'광주': 'KSXX0014',
-			'부산': 'KSXX0050',
-			'제주': 'KSXX0053',
-			'강릉': 'KSXX0011',
-			'울릉': 'KSXX0039',
-			'독도': 'KSXX0036'
-		};
 		Weather.getWeather(function(data){
 			console.log(data);
 		}, {'서울': 'KSXX0037'});
