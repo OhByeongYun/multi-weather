@@ -202,7 +202,7 @@ block content
 			x.domain(d3.extent(obj, function(d) { return d.date; }));
 			y.domain(d3.extent(obj, function(d) { return d.high; }));
 			
-			svg.append("g").attr("class", "x axis").attr("transform", "translate(0, " + height + ")").call(xAxis).append("text").attr("x", 5).attr("transform", "translate(" + (width - 100) + ", -10)").text("최고온도, 최저온도 (단위: 일)");
+			svg.append("g").attr("class", "x axis").attr("transform", "translate(0, " + height + ")").call(xAxis).append("text").attr("x", 5).attr("transform", "translate(" + (width - 100) + ", -10)").text("최고온도 (단위: 일)");
 			
 			svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("y", 5).attr("transform", "translate(0, -10)").text("도(C)");
 			
