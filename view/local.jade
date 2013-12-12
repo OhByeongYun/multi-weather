@@ -178,6 +178,7 @@ block content
 				var o = {};
 				o.date = date;
 				o.high = +d.high;
+				o.low = +d.low;
 				o.text = d.text;
 				
 				obj.push(o);
@@ -191,7 +192,8 @@ block content
 			var y = d3.scale.linear().range([height, 0]);
 			
 			var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(function(d) { return d + "일";});
-			var yAxis = d3.svg.axis().scale(y).orient("left");			
+			var yAxis = d3.svg.axis().scale(y).orient("left");
+			
 			var line = d3.svg.line().interpolate(interpolateSankey).x(function(d){ return x(d.date) }).y(function(d){ return y(d.high) });
 			
 			d3.select("#forecast").selectAll("g").remove();
@@ -200,11 +202,17 @@ block content
 			x.domain(d3.extent(obj, function(d) { return d.date; }));
 			y.domain(d3.extent(obj, function(d) { return d.high; }));
 			
-			svg.append("g").attr("class", "x axis").attr("transform", "translate(0, " + height + ")").call(xAxis).append("text").attr("x", 5).attr("transform", "translate(" + (width - 100) + ", -10)").text("최고온도 (단위: 일)");
+			svg.append("g").attr("class", "x axis").attr("transform", "translate(0, " + height + ")").call(xAxis).append("text").attr("x", 5).attr("transform", "translate(" + (width - 100) + ", -10)").text("최고온도, 최저온도 (단위: 일)");
 			
 			svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr("y", 5).attr("transform", "translate(0, -10)").text("도(C)");
 			
-			svg.append("path").datum(obj).attr("class", "line").attr("d", line).append("text");
+			svg.selectAll(".point").data(obj).enter().append("svg:circle").attr("stroke", "#ffa951").attr("fill", function(d) { return "#ffa951"; }).attr("cx", function(d) { return x(d.date); }).attr("cy", function(d) { return y(d.high) }).attr("r", function(d) { return 4; });
+			
+			svg.append("path").datum(obj).attr("class", "line").attr("d", line);
+			
+			d3.selectAll("circle").each(function(){ this.parentNode.appendChild(this); });
+			
+			svg.append("svg:line");
 		}
 		
 		function interpolateSankey(points) {

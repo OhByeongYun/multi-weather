@@ -3,6 +3,20 @@ extends helpers/layout
 block link
 	link(rel="stylesheet", href="css/index.css")
 	script(src="js/weather.js")
+	style.
+		#first {
+			padding-left:20px;
+			padding-top: 20px;
+		}
+		.hero-unit {
+			padding: 40px !important;
+		}
+		.btn {
+			width: 200px;
+			height: 60px;
+			font-size: 20px;
+			margin-right: 20px;
+		}
 	
 block content
 	// content
@@ -11,4 +25,18 @@ block content
 		include helpers/sidebar
 		
 		div#colum
-			div adsf
+			div.container-fluid
+				div.row#first
+					div.alert.alert-error
+						h4 Warning!
+						div 브라우저 GPS옵션을 사용함으로 설정해주세요.
+					div.hero-unit
+						h2 환영합니다!
+						div 환영합니다. 이곳에서 당신이 사는 지역의 날씨를 간단하게 확인해보세요.
+						div 가까운 지역뿐만 아니라 우리나라의 주요 도시의 날씨를 확인 할 수 있습니다.
+						br
+						div 아래의 버튼을 통해 바로 날씨를 확인해보세요!
+						br
+						button.btn.btn-primary#all(onclick="javascript:location.href='/all'") 전체보기
+						button.btn.btn-success#local(onclick="javascript:location.href='/local'") 지역보기
+						
